@@ -28,9 +28,10 @@ driver.find_element(By.ID, 'nav-orders').click()
 sleep(2)
 
 expected_result = 'Sign in'
-actual_result = driver.find_element(By.XPATH, "//h1[@class='a-spacing-small']")
-expected_result2 = 'Email field'
-actual_result2 = driver.find_element(By.XPATH, "//input[@type='email']")
-print('Sign in page opened: Sign In header is visible, email input field is present')
+actual_result = driver.find_element(By.XPATH, "//h1[@class='a-spacing-small']").text
+assert expected_result == actual_result, f'Expected {expected_result} instead got {actual_result}'
 
+driver.find_element(By.ID, 'ap_email')
+
+print('Test Passed')
 driver.quit()
