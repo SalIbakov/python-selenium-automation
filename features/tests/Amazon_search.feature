@@ -32,9 +32,9 @@ Feature: Amazon Search Testing
 
   Scenario: verify user can add product to cart
     Given open Amazon page
-    When search for phone Nokia 225
+    When search for the expanse season 5 poster paper
     When click on first product
     When Store product name
-    When click add to cart button
-    When click Cart Icon
+    When Click add to Cart Icon
+    When Open cart page
     Then verify cart has correct product

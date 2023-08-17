@@ -1,5 +1,7 @@
 from behave import given, when, then
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+
 
 SEARCH_FIELD = (By.ID, 'twotabsearchtextbox')
 SEARCH_BTN = (By.ID, 'nav-search-submit-button')
@@ -7,7 +9,10 @@ CART_ICON = (By.CSS_SELECTOR, '#nav-cart')
 ORDERS_BTN = (By.ID, 'nav-orders')
 HEADER_LINKS = (By.CSS_SELECTOR, '#zg_header a')
 BESTSELLER_BTN = (By.CSS_SELECTOR, "[href='/gp/bestsellers/?ref_=nav_cs_bestsellers']")
-PRODUCT_NAME = (By.CSS_SELECTOR, 'h1 #productTitle')
+PRODUCT_NAME = (By.CSS_SELECTOR, '#productTitle')
+CLICK_FIRST_ITEM = (By.CSS_SELECTOR, ' .a-price-whole')
+CLICK_ADD_TO_CART = (By.ID, 'add-to-cart-button')
+SIGNIN_BTN = (By.CSS_SELECTOR, '#nav-signin-tooltip .nav-action-signin-button')
 
 
 @given('open Amazon page')
@@ -33,7 +38,7 @@ def click_orders(context):
 
 @when('click on first product')
 def click_on_first_product(context):
-    context.driver.find_element(By.CSS_SELECTOR, ).click()
+    context.driver.find_element(*CLICK_FIRST_ITEM).click()
 
 
 @when('Store product name')
@@ -46,6 +51,20 @@ def store_product_name(context):
 def click_bestsellers_button(context):
     context.driver.find_element(*BESTSELLER_BTN).click()
 
+@when('Click add to Cart Icon')
+def click_add_to_cart(context):
+    context.driver.find_element(*CLICK_ADD_TO_CART).click()
+
+
+@when('Open cart page')
+def open_cart_page(context):
+    context.driver.get('https://www.amazon.com/gp/cart/view.html?ref_=nav_cart')
+
+
+@when('Click on button from Signin popup')
+def click_from_signin_popup(context):
+    context.driver.wait.until(EC.element_to_be_clickable(SIGNIN_BTN)).click()
+    assert "signin" in context.driver.current_url, "Sign In page not opened"
 
 @then('Verify BestSellers page has 5 header links')
 def verify_link_amount(context):
