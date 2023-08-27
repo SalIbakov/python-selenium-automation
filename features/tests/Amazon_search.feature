@@ -9,7 +9,7 @@ Feature: Amazon Search Testing
   Scenario: verify when clicking Orders takes to Sign in
     Given open Amazon page
     When click Orders
-    Then verify Sign In page opens
+    Then Verify Sign In page opened
 
   Scenario: verify user can search for phone
     Given open Amazon page
@@ -32,9 +32,15 @@ Feature: Amazon Search Testing
 
   Scenario: verify user can add product to cart
     Given open Amazon page
-    When search for the expanse season 5 poster paper
+    When search for The Expanse TV Show Series Poster GLOSSY FINISH - TVS709 (24" x 36" (61cm x 91.5cm))
     When click on first product
     When Store product name
     When Click add to Cart Icon
     When Open cart page
     Then verify cart has correct product
+
+  Scenario: Verify user can see product and images
+    Given open Amazon page
+    When search for coffee
+    Then Verify every product has name and image
+
