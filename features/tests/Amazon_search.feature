@@ -32,7 +32,7 @@ Feature: Amazon Search Testing
 
   Scenario: verify user can add product to cart
     Given open Amazon page
-    When search for The Expanse TV Show Series Poster GLOSSY FINISH - TVS709 (24" x 36" (61cm x 91.5cm))
+    When search for MCPosters The Expanse TV Show Series Poster GLOSSY FINISH - TVS709 (24" x 36" (61cm x 91.5cm))
     When click on first product
     When Store product name
     When Click add to Cart Icon

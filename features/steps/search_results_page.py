@@ -6,6 +6,7 @@ SIGNIN_HEADER = (By.XPATH, "//h1[@class='a-spacing-small']")
 EMAIL_INPUT = (By.ID, 'ap_email')
 CART_EMPTY_SIGN = (By.XPATH, "//div[@class='a-row sc-your-amazon-cart-is-empty']")
 PRODUCT_NAME = (By.ID, 'productTitle')
+PRODUCT_NAME1 = (By.CSS_SELECTOR, '#productTitle')
 PRODUCT_TITLE = (By.CSS_SELECTOR, 'h2 span.a-text-normal')
 SEARCH_RESULTS = (By.CSS_SELECTOR, "[data-component-type='a-search-result']")
 PRODUCT_IMG = (By.CSS_SELECTOR, " .a-image[data-image-latency='s-product-image']")
@@ -13,8 +14,9 @@ PRODUCT_IMG = (By.CSS_SELECTOR, " .a-image[data-image-latency='s-product-image']
 
 @then('verify Amazon Cart page is empty')
 def verify_amazon_cart_page_is_empty(context):
-    actual_result = context.driver.find_element(*CART_EMPTY_SIGN).text
-    assert actual_result == 'Your Amazon Cart is empty', f'Expected Your Amazon Cart is empty instead got {actual_result}'
+    context.app.cart.verify_amazon_cart_page_is_empty()
+    #actual_result = context.driver.find_element(*CART_EMPTY_SIGN).text
+    #assert actual_result == 'Your Amazon Cart is empty', f'Expected Your Amazon Cart is empty instead got {actual_result}'
 
 
 @then('verify search result is {expected_result}')
@@ -24,8 +26,10 @@ def verify_search_result(context, expected_result):
 
 @then('verify cart has correct product')
 def verify_correct_product(context):
-    actual_name = context.driver.find_element(*PRODUCT_NAME).text
-    assert context.product_name == actual_name, f'Expected {context.product_name} but got {actual_name}'
+    context.app.cart.verify_correct_product()
+    #context.driver.get('https://www.amazon.com/gp/cart/view.html?ref_=nav_cart')
+    #actual_name = context.driver.find_element(*PRODUCT_NAME).text
+    #assert context.product_name == actual_name, f'Expected {context.product_name} but got {actual_name}'
 
 
 @then('Verify Sign In page opened')

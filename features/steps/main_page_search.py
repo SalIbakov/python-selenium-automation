@@ -1,6 +1,7 @@
 from behave import given, when, then
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from time import sleep
 
 
 SEARCH_FIELD = (By.ID, 'twotabsearchtextbox')
@@ -31,7 +32,7 @@ def search_on_amazon(context, product):
 
 @when('click Cart Icon')
 def click_cart_icon(context):
-    context.driver.find_element(*CART_ICON).click()
+    context.app.header.click_cart_icon()
 
 
 @when('click Orders')
@@ -42,13 +43,14 @@ def click_orders(context):
 
 @when('click on first product')
 def click_on_first_product(context):
-    context.driver.find_element(*CLICK_FIRST_ITEM).click()
+    context.app.search_result_page.click_on_first_product()
 
 
 @when('Store product name')
 def store_product_name(context):
-    context.product_name = context.driver.find_element(*PRODUCT_NAME).text
-    print(f'Current product: {context.product_name}')
+    context.app.search_result_page.store_product_name()
+    #context.product_name = context.driver.find_element(*PRODUCT_NAME).text
+    #print(f'Current product: {context.product_name}')
 
 
 @when('Click BestSellers button')
@@ -58,18 +60,44 @@ def click_bestsellers_button(context):
 
 @when('Click add to Cart Icon')
 def click_add_to_cart(context):
-    context.driver.find_element(*CLICK_ADD_TO_CART).click()
+    context.app.cart.click_add_to_cart()
+    #context.driver.find_element(*CLICK_ADD_TO_CART).click()
 
 
 @when('Open cart page')
 def open_cart_page(context):
-    context.driver.get('https://www.amazon.com/gp/cart/view.html?ref_=nav_cart')
+    context.app.cart.open_cart_page()
 
 
 @when('Click on button from Signin popup')
 def click_from_signin_popup(context):
-    context.driver.wait.until(EC.element_to_be_clickable(SIGNIN_BTN)).click()
-    assert "signin" in context.driver.current_url, "Sign In page not opened"
+    #context.driver.wait.until(
+    #    EC.element_to_be_clickable(SIGNIN_BTN),
+    #   message='SignIn btn from popup not clickable'
+    #).click()
+    context.app.header.click_from_signin_popup()
+
+@when('Wait for 3 sec')
+def wait_sec(context):
+    sleep(3)
+
+
+@then('Verify Sign In is clickable')
+def verify_signin_btn_clickable(context):
+    #context.driver.wait.until(
+    #    EC.element_to_be_clickable(SIGNIN_BTN),
+    #    message='SignIn btn from popup not clickable'
+    #)
+    context.app.header.verify_signin_btn_clickable()
+
+
+@then('Verify Sign In disappears')
+def verify_signin_btn_disappears(context):
+    #context.driver.wait.until(
+    #    EC.invisibility_of_element_located(SIGNIN_BTN),
+    #    message='SignIn btn did not disappear'
+    #)
+    context.app.header.verify_signin_btn_disappears()
 
 
 @then('Verify BestSellers page has 5 header links')
