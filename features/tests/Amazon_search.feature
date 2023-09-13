@@ -44,3 +44,4 @@ Feature: Amazon Search Testing
     When search for coffee
     Then Verify every product has name and image
 
+
