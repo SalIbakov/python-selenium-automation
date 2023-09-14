@@ -5,3 +5,9 @@ Feature: Test Main page UI
     Given open Amazon page
     When Click BestSellers button
     Then Verify BestSellers page has 5 header links
+
+  Scenario: User can see language options
+    Given Open Amazon page
+    When Hover over language options
+    Then Verify Spanish option present
+

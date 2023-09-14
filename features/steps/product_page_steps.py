@@ -7,10 +7,15 @@ COLOR_OPTIONS = (By.CSS_SELECTOR, '#variation_color_name li')
 CURRENT_COLOR = (By.CSS_SELECTOR, '#variation_color_name .selection')
 
 
-
 @given('Open Amazon product {product_id} page')
 def open_amazon_product(context, product_id):
     context.driver.get(f'https://www.amazon.com/dp/{product_id}/')
+
+
+@when('Hover over New Arrivals')
+def hover_new_arrivals(context):
+    context.app.header.hover_new_arrivals()
+
 
 @then('Verify user can click through colors')
 def verify_can_click_colors(context):

@@ -82,6 +82,16 @@ def wait_sec(context):
     sleep(3)
 
 
+@when('Hover over language options')
+def hover_lang(context):
+    context.app.header.hover_lang()
+
+
+@when('Select department by alias {dept}')
+def select_dept(context, dept):
+    context.app.header.select_dept(dept)
+
+
 @then('Verify Sign In is clickable')
 def verify_signin_btn_clickable(context):
     #context.driver.wait.until(
@@ -93,11 +103,26 @@ def verify_signin_btn_clickable(context):
 
 @then('Verify Sign In disappears')
 def verify_signin_btn_disappears(context):
-    #context.driver.wait.until(
+    # context.driver.wait.until(
     #    EC.invisibility_of_element_located(SIGNIN_BTN),
     #    message='SignIn btn did not disappear'
-    #)
+    # )
     context.app.header.verify_signin_btn_disappears()
+
+
+@then('Verify Spanish option present')
+def verify_spanish_lang(context):
+    context.app.header.verify_spanish_lang()
+
+
+@then('Verify user can see Women deals')
+def verify_women_deals(context):
+    context.app.header.verify_women_deals()
+
+
+@then('Verify {dept} department is selected')
+def verify_dept_selected(context, dept):
+    context.app.header.verify_dept_selected(dept)
 
 
 @then('Verify BestSellers page has 5 header links')

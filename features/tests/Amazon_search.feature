@@ -44,4 +44,23 @@ Feature: Amazon Search Testing
     When search for coffee
     Then Verify every product has name and image
 
+#  Scenario: User can select and search for in a department
+#    Given open Amazon page
+#    When Select department by alias stripbooks
+#    When search for Faust
+#    Then Verify books department is selected
+
+  Scenario Outline: User can select and search for in a department
+    Given open Amazon page
+    When Select department by alias <dept_alias>
+    When search for <search_word>
+    Then Verify <selected_dept> department is selected
+    Examples:
+    |dept_alias     |search_word     |selected_dept  |
+    |stripbooks     |Faust           |books          |
+    |audible        |Alice in        |audible        |
+
+
+
+
 

@@ -50,6 +50,12 @@ class Page:
             message=f'Element not clickable: {locator}'
         )
 
+    def wait_for_element_appear(self, *locator):
+        self.wait.until(
+            EC.visibility_of_element_located(locator),
+            message=f'Element did not appear: {locator}'
+        )
+
     def wait_for_element_clickable_click(self, *locator):
             e = self.wait.until(
                 EC.element_to_be_clickable(locator),
