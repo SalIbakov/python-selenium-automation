@@ -39,6 +39,7 @@ Feature: Amazon Search Testing
     When Open cart page
     Then verify cart has correct product
 
+  @smoke
   Scenario: Verify user can see product and images
     Given open Amazon page
     When search for coffee

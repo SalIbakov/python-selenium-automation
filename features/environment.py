@@ -5,6 +5,10 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.options import Options
 
 from app.application import Application
+from support.logger import logger
+
+
+# behave -f allure_behave.formatter:AllureFormatter -o test_results/ features/tests/bestsellers.feature
 
 
 def browser_init(context):
@@ -53,6 +57,7 @@ def browser_init(context):
 
 def before_scenario(context, scenario):
     print('\nStarted scenario: ', scenario.name)
+    logger.info(f'\nStarted scenario: {scenario.name}')
     browser_init(context)
     # Pass scenario.name to init() for browserstack config:
     # browser_init(context, scenario.name)
@@ -60,11 +65,13 @@ def before_scenario(context, scenario):
 
 def before_step(context, step):
     print('\nStarted step: ', step)
+    logger.info(f'Started step: {step}')
 
 
 def after_step(context, step):
     if step.status == 'failed':
         print('\nStep failed: ', step)
+        logger.error(f'Step failed: {step}')
 
 
 def after_scenario(context, feature):

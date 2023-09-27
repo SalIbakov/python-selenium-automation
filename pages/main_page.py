@@ -1,14 +1,12 @@
 from selenium.webdriver.common.by import By
 from time import sleep
 from pages.base_page import Page
+from support.logger import logger
 
 
 class MainPage(Page):
 
     def open_main(self):
-        self.driver.get('https://www.amazon.com/')
-        # context.driver.get('https://www.amazon.com/')
-        sleep(2)
-        self.driver.refresh()
+        self.open_url()
 
 
